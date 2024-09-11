@@ -29,7 +29,7 @@ router.post('/', (req, res) => {
             ...user, id: uuidv4() 
         }
     );
-    res.send(`${user.first_name} has been added to the Database`);
+    res.send(`${user.first_name} has been  entered in to  the Database`);
 })
 
 export default router
