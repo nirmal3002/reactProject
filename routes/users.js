@@ -16,12 +16,13 @@ const router = express.Router();
 //     email: 'alicesmith@example.com',
 //   },
 // ];
-const users=[]
+ users=[]
 
-// Getting the list of users from the mock database
+// GET
 router.get('/', (req, res) => {
     res.send(users);
 })
+//POST
 router.post('/', (req, res) => {
     const user = req.body;
     users.push(
@@ -31,5 +32,24 @@ router.post('/', (req, res) => {
     );
     res.send(`${user.first_name} has been  entered  to  the Database`);
 })
+//GET through ID
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+
+    const foundUser = users.find((user) => user.id === id)
+if(foundUser){
+    res.send(foundUser)
+}else{
+    res.status(404).send('user not found');
+}
+});
+//DELETE through ID
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+  
+    users = users.filter((user) => user.id !== id)
+  
+    res.send(`${id} deleted successfully from database`);
+  });
 
 export default router
